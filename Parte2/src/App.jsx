@@ -1,62 +1,46 @@
 import { useState } from "react"
 
+const Display = ({ counter }) => <>{counter}</>
 
-// ? Desestructuracion version 1
-
-// const Hello = (props) => {
-//   // Desestructuracion utilizando name y age
-//   const { name, age } = props
-//   const bornYear = () => new Date().getFullYear() - age
-
-//   return (
-//     <>
-//       <p>
-//         Hello {name}, you are {age} years old
-//       </p>
-//       <p>
-//         So you were probably born in {bornYear()}
-//       </p>
-//     </>
-//   )
-// }
-
-
-// ? Desestructuracion version 2
-const Hello = ({ name, age }) => {
-  // Desestructuracion utilizando name y age
-  const bornYear = () => new Date().getFullYear() - age
-
-  return (
-    <>
-      <p>
-        Hello {name}, you are {age} years old
-      </p>
-      <p>
-        So you were probably born in {bornYear()}
-      </p>
-    </>
-  )
-}
-
-
+const Button = ({ onSmash, text }) => { <button onClick={onSmash}>{text}</button> }
 
 const App = () => {
   const [counter, setCounter] = useState(0)
+  console.log('Rendering with counter value ', counter)
 
-  setTimeout(
-    () => setCounter(counter + 1),
-    1000
-  )
 
-  console.log('rendering...', counter)
+  const increaseByOne = () => {
+    console.log('increasing, value before; ', counter)
+    setCounter(counter + 1)
+  }
 
+  const decreaseByOne = () => {
+    console.log('decreasing, value before: ', counter)
+    setCounter(counter - 1)
+  }
+
+  const setToZero = () => {
+    console.log('resetting to zero, value before: ', counter)
+    setCounter(0)
+  }
 
   return (
     <>
-      {counter}
+      <Display counter={counter} />
+      <Button
+        onClick={increaseByOne}
+        text="plus">
+      </Button>
+      <Button
+        onClick={setToZero}
+        text={"zero"}>
+      </Button>
+      <Button
+        onClick={decreaseByOne}
+        text={"minus"}>
+      </Button>
     </>
   )
-
 
 }
 
