@@ -15,7 +15,24 @@ function App() {
         exercises: 14
       }
     ]
-  }
+  };
+
+
+
+  // const part1 = {
+  //   name: 'Fundamentals of React',
+  //   exercises: 10
+  // }
+  // const part2 = {
+  //   name: 'Using props to pass data',
+  //   exercises: 7
+  // }
+
+  // const part3 = {
+  //   name: 'State of component',
+  //   exercises: 14
+  // }
+
 
   // const part1 = 'Fundamentals of React'
   // const exercises1 = 10
@@ -38,6 +55,8 @@ function App() {
 
 // Componente para el Header
 function Header(props) {
+  // console.log(props);
+
   return (
     <>
       <h1>{props.course}</h1>
@@ -47,7 +66,6 @@ function Header(props) {
 
 // Componente para el contenido
 function Content(props) {
-
 
   return (
     <>
