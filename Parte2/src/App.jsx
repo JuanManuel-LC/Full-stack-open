@@ -1,5 +1,8 @@
+import { useState } from "react"
+
 
 // ? Desestructuracion version 1
+
 // const Hello = (props) => {
 //   // Desestructuracion utilizando name y age
 //   const { name, age } = props
@@ -16,6 +19,7 @@
 //     </>
 //   )
 // }
+
 
 // ? Desestructuracion version 2
 const Hello = ({ name, age }) => {
@@ -35,14 +39,21 @@ const Hello = ({ name, age }) => {
 }
 
 
+
 const App = () => {
-  const name = 'Peter'
-  const age = 10
+  const [counter, setCounter] = useState(0)
+
+  setTimeout(
+    () => setCounter(counter + 1),
+    1000
+  )
+
+  console.log('rendering...', counter)
+
+
   return (
     <>
-      <h1>Greetings</h1>
-      <Hello name='Maya' age={26 + 10} />
-      <Hello name={name} age={age} />
+      {counter}
     </>
   )
 
