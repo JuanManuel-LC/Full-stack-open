@@ -16,10 +16,16 @@ const History = (props) => {
   )
 }
 
-const Button = ({ handleClick, text }) => {
-  <button onClick={handleClick}>
-    {text}
-  </button>
+const Button = (props) => {
+  console.log(props);
+
+  const { handleClick, text } = props
+
+  return (
+    < button onClick={handleClick} >
+      {text}
+    </ button>
+  )
 }
 
 
@@ -38,6 +44,24 @@ const App = () => {
     setAll(allClicks.concat('R'))
     setRight(right + 1)
   }
+
+  // ! Que no hacer con los useState y useEffect
+
+  // if ( age > 10 ) {
+  //   // esto no funciona!
+  //   const [foobar, setFoobar] = useState(null)
+  // }
+
+  // for ( let i = 0; i < age; i++ ) {
+  //   // esto tampoco está bien
+  //   const [rightWay, setRightWay] = useState(false)
+  // }
+
+  // const notGood = () => {
+  //   // y esto también es ilegal
+  //   const [x, setX] = useState(-1000)
+  // }
+
 
 
   return (
