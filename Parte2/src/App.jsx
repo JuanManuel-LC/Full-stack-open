@@ -1,83 +1,55 @@
-import { useState } from "react"
+import { useState } from "react";
 
-const History = (props) => {
-  if (props.allClicks.length === 0) {
+const ProcessStatistics = ({ total, average, positive }) => {
     return (
-      <>
-        the App is used by pressing the buttons
-      </>
-    )
-  }
-  return (
-    <>
-      button press history: {props.allClicks.join(' ')}
-    </>
+        <>
+            <p>Total: {total}</p>
+            <p>Average: {average.toFixed(2)}</p>
+            <p>Positve: {positive.toFixed(2)}</p>
+        </>
+    );
+};
 
-  )
-}
+const Statistics = ({ good, neutral, bad }) => {
+    const total = good + neutral + bad;
+    const average =
+        total === 0 ? 0 : (good * 1 + neutral * 0 + bad * -1) / total;
+    const positive = total === 0 ? 0 : (good / total) * 100;
 
-const Button = (props) => {
-  console.log(props);
-
-  const { handleClick, text } = props
-
-  return (
-    < button onClick={handleClick} >
-      {text}
-    </ button>
-  )
-}
-
+    if (total > 0) {
+        return (
+            <>
+                <p>Good: {good}</p>
+                <p>Neutral: {neutral}</p>
+                <p>Bad: {bad}</p>
+                <ProcessStatistics
+                    total={total}
+                    average={average}
+                    positive={positive}
+                />
+            </>
+        );
+    } else {
+        return <p>No feedback given</p>;
+    }
+};
 
 const App = () => {
+    const [good, setGood] = useState(0);
+    const [neutral, setNeutral] = useState(0);
+    const [bad, setBad] = useState(0);
 
-  const [left, setLeft] = useState(0)
-  const [right, setRight] = useState(0)
-  const [allClicks, setAll] = useState([])
+    return (
+        <>
+            <h1>Give Feedback</h1>
+            <button onClick={() => setGood(good + 1)}>Good</button>
+            <button onClick={() => setNeutral(neutral + 1)}>Neutral</button>
+            <button onClick={() => setBad(bad + 1)}>Bad</button>
 
-  const handleLeftClick = () => {
-    setAll(allClicks.concat('L'))
-    setLeft(left + 1)
-  }
+            <h2>Stadistics</h2>
+            <Statistics good={good} neutral={neutral} bad={bad} />
+        </>
+    );
+};
 
-  const handleRightClick = () => {
-    setAll(allClicks.concat('R'))
-    setRight(right + 1)
-  }
-
-  // ! Que no hacer con los useState y useEffect
-
-  // if ( age > 10 ) {
-  //   // esto no funciona!
-  //   const [foobar, setFoobar] = useState(null)
-  // }
-
-  // for ( let i = 0; i < age; i++ ) {
-  //   // esto tampoco está bien
-  //   const [rightWay, setRightWay] = useState(false)
-  // }
-
-  // const notGood = () => {
-  //   // y esto también es ilegal
-  //   const [x, setX] = useState(-1000)
-  // }
-
-
-
-  return (
-    <>
-      {left}
-      <Button handleClick={handleLeftClick} text='left'>
-        left
-      </Button>
-      <Button handleClick={handleRightClick} text='right'>
-        right
-      </Button>
-      {right}
-      <History allClicks={allClicks} />
-    </>
-  )
-
-}
-
-export default App
+export default App;
